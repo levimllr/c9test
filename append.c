@@ -15,30 +15,47 @@ node;
 
 node* head = NULL;
 
-void prepend(int i)
+void append(int i)
 {
     // build new node
     node* new = malloc(sizeof(node));
 
+    // Make sure there's room for our new node in memory!
+    // If malloc returns NULL, there's no room at the inn, so to speak.
     if (new == NULL)
     {
         exit(1);
     }
+
     // initialize new node
     new->n = i;
+    new->next = NULL;
 
-    // add new node to head of list
-    new->next = head;
-    head = new;
+    // add new node to end of list
+    node* prev = NULL;
+
+    for (node* cur = head; cur != NULL; cur = cur->next)
+    {
+        prev = cur;
+    }
+
+    if (prev == NULL)
+    {
+        head = new;
+    }
+    else
+    {
+        prev->next = new;
+    }
 }
 
 int main(int argc, char* argv[])
 {
     // creating list
-    printf("Prepending ints 0-%i onto the list... ", SIZE - 1);
+    printf("Appending ints 0-%i onto the list...\n", SIZE - 1);
     for (int i = 0; i < SIZE; i++)
     {
-        prepend(i);
+        append(i);
     }
     printf("done!\n");
 
