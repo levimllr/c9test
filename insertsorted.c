@@ -12,7 +12,7 @@
 
 // Definitions need not be limited to header files. #define, like all words that begin with #, is a (preprocessor) directive which modifies the source code before compilation.
 // #define does just that; it allows us to define a constant which can be used and understood however deep code gets nested in our program! Constants cannot be modified.
-// In this particular program, we define a constant SIZE to be 5. One style conventions is to CAPITALIZE CONSTANTS.
+// In this particular program, we define a constant SIZE to be 5. One style convention is to CAPITALIZE CONSTANTS.
 #define SIZE 5
 
 // Having listed our directives for the preprocessor, we can now concern ourselves with the task at hand:
@@ -62,7 +62,7 @@ void insert_sorted(int i)
     new->n = i;
     new->next = NULL;
 
-    // So we have a newly-minted node. Now what? We need to insert it and sort the linked list of which it's become a part!
+    // So we have a newly-minted node. Now what? We need to insert it and sort the linked list of which it's to become a part!
     // We will find where to put our node by crawling over the SLL with two pointers: prev(ious) and cur(rent).
     // Since we're sorting values in ascending order, we'll break the for loop if we find a value larger than i.
     // In the following for loop, we create a pointer to the head node called cur and will be incrementing it by referring to the pointer of the next node...
@@ -79,7 +79,7 @@ void insert_sorted(int i)
         // We maintain prev as a comparative reference for when the for loop breaks.
         else
         {
-
+            prev = cur;
         }
     }
 
@@ -87,14 +87,15 @@ void insert_sorted(int i)
     // If prev is NULL, there is no prev and the node belongs at the head of the list.
     if (prev == NULL)
     {
-
+        new->next = head;
+        head = new;
 
     }
     // else insert in middle or end
     else
     {
-
-
+        new->next = prev->next;
+        prev->next = new;
     }
 }
 
